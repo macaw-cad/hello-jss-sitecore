@@ -22,7 +22,7 @@ const chokidar = require('chokidar');
 
 /* eslint-disable no-console */
 
-const componentFactoryPath = path.resolve('src/temp/componentFactory.js');
+const componentFactoryPath = path.resolve('src/temp/componentFactory.ts');
 const componentRootPath = 'src/components';
 
 const isWatch = process.argv.some((arg) => arg === '--watch');
@@ -66,7 +66,9 @@ function generateComponentFactory() {
 
     if (
       fs.existsSync(path.join(componentFolderFullPath, 'index.js')) ||
-      fs.existsSync(path.join(componentFolderFullPath, 'index.jsx'))
+      fs.existsSync(path.join(componentFolderFullPath, 'index.jsx')) ||
+      fs.existsSync(path.join(componentFolderFullPath, 'index.ts')) ||
+      fs.existsSync(path.join(componentFolderFullPath, 'index.tsx'))
     ) {
       const importVarName = componentFolder.replace(/[^\w]+/g, '');
 

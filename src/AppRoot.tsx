@@ -1,10 +1,14 @@
-import React from 'react';
+import * as React from 'react';
 import { SitecoreContext } from '@sitecore-jss/sitecore-jss-react';
 import { Route, Switch } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
 import componentFactory from './temp/componentFactory';
 import SitecoreContextFactory from './lib/SitecoreContextFactory';
 import RouteHandler from './RouteHandler';
+import ApolloClient from 'apollo-client';
+import { NormalizedCacheObject } from 'apollo-cache-inmemory';
+
+import { StaticRouter } from 'react-router';
 
 // This is the main JSX entry point of the app invoked by the renderer (server or client rendering).
 // By default the app's normal rendering is delegated to <RouteHandler> that handles the loading of JSS route data.
@@ -22,8 +26,8 @@ export const routePatterns = [
 //    Not needed if not using connected GraphQL.
 // SitecoreContext: provides component resolution and context services via withSitecoreContext
 // Router: provides a basic routing setup that will resolve Sitecore item routes and allow for language URL prefixes.
-const AppRoot = ({ path, Router, graphQLClient }) => {
-  const routeRenderFunction = (props) => <RouteHandler route={props} />;
+const AppRoot = ({ path, Router, graphQLClient }: { path: string, Router: any, graphQLClient: ApolloClient<NormalizedCacheObject> }) => {
+  const routeRenderFunction = (props: any) => <RouteHandler route={props} />;
   return (
     <ApolloProvider client={graphQLClient}>
       <SitecoreContext componentFactory={componentFactory} contextFactory={SitecoreContextFactory}>
